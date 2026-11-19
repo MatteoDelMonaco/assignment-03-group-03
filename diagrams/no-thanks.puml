@@ -1,0 +1,61 @@
+
+@startuml no-thanks
+
+!include mda-style.puml
+!include mda-patterns.puml
+
+package "Aesthetics" as A <<aesthetics>> {
+    $FreedomOfChoice()
+    $Tension()
+    $Achievement()
+    $AnalysisParalysis()
+}
+
+package "Dynamics" as D <<dynamics>> {
+    $TacticalPlanning()
+    $ResourceManagement()
+
+}
+
+package "Mechanics" as M <<mechanics>> {
+    $Scores()
+    $Randomness()
+    $Cards()
+    $Decks()
+    $DrawingStacks()
+    $Resources()
+    $Tokens()
+    $TokenPlacement()
+}
+
+
+cards --> decks 
+decks --> drawing_stacks
+drawing_stacks --> randomness
+tokens --> resources 
+tokens --> token_placement
+token_placement ..> scores
+
+token_placement --> tension
+randomness --> tension
+
+tension ..> tactical_planning
+
+
+resources --> resource_management
+
+token_placement ..> resource_management
+resource_management --> tactical_planning
+
+tactical_planning --> freedom_of_choice
+
+cards ..> scores
+
+
+
+
+
+
+
+@enduml
+

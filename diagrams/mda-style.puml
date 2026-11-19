@@ -1,0 +1,115 @@
+
+' ============================================================
+' MDA PALETTE
+' ============================================================
+
+!$blueLight  = "#D9EDF2"
+!$blueMedium = "#5EABBF"
+!$blueDark   = "#2E869B"
+
+!$greenLight  = "#E9F0DD"
+!$greenMedium = "#A8C36F"
+!$greenDark   = "#79983E"
+
+!$redLight  = "#F4DDDA"
+!$redMedium = "#C96B60"
+!$redDark   = "#943C34"
+
+' ============================================================
+' GLOBAL SETTINGS
+' ============================================================
+
+top to bottom direction
+
+skinparam shadowing false
+skinparam backgroundColor white
+skinparam defaultFontNaor example if i tag something as me Arial
+skinparam defaultFontSize 13
+'skinparam linetype ortho
+skinparam packageStyle rectangle
+
+skinparam ArrowColor #333333
+skinparam ArrowThickness 1.5
+
+skinparam nodesep 40
+skinparam ranksep 50
+
+hide stereotype
+
+' ============================================================
+' STYLE GENERATOR
+' ============================================================
+
+' Defines the appearance of one stereotype.
+
+!procedure $nodeStyle($tag, $fill, $border, $font, $corner)
+    skinparam rectangle<<$tag>> {
+        BackgroundColor $fill
+        BorderColor $border
+        FontColor $font
+        RoundCorner $corner
+    }
+!endprocedure
+
+' Generates all four combinations for a layer:
+' normal, main, MDA, MDA main.
+
+!procedure $layerStyles($layer, $light, $medium, $dark)
+
+    !$mainTag = $layer + "-main"
+    !$mdaTag = $layer + "-mda"
+    !$mdaMainTag = $layer + "-mda-main"
+
+    $nodeStyle($layer, $light, $dark, $dark, 0)
+    $nodeStyle($mainTag, $dark, $dark, "white", 0)
+    $nodeStyle($mdaTag, $light, $medium, $dark, 100)
+    $nodeStyle($mdaMainTag, $dark, $dark, "white", 100)
+
+!endprocedure
+
+' ============================================================
+' GENERATE ALL NODE STYLES
+' ============================================================
+
+$layerStyles("a", $blueLight, $blueMedium, $blueDark)
+$layerStyles("d", $greenLight, $greenMedium, $greenDark)
+$layerStyles("m", $redLight, $redMedium, $redDark)
+
+' ============================================================
+' PACKAGE STYLES
+' ============================================================
+
+skinparam package {
+    FontSize 16
+    FontStyle bold
+
+    BackgroundColor<<aesthetics>> $blueLight
+    BorderColor<<aesthetics>> $blueMedium
+    FontColor<<aesthetics>> $blueDark
+
+    BackgroundColor<<dynamics>> $greenLight
+    BorderColor<<dynamics>> $greenMedium
+    FontColor<<dynamics>> $greenDark
+
+    BackgroundColor<<mechanics>> $redLight
+    BorderColor<<mechanics>> $redMedium
+    FontColor<<mechanics>> $redDark
+}
+
+' ============================================================
+' LEGEND
+' ============================================================
+
+legend bottom
+|= Symbol |= Meaning |
+| ( MDA ) | MDA concept |
+| □ | Game design pattern |
+| ■ | Main pattern or concept |
+| ─────► | Instantiates |
+| - - - - ► | Modulates |
+| <back:$blueLight>Aesthetics</back> | Aesthetics layer |
+| <back:$greenLight>Dynamics</back> | Dynamics layer |
+| <back:$redLight>Mechanics</back> | Mechanics layer |
+| * | Self-defined pattern |
+endlegend
+
