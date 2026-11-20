@@ -4,8 +4,8 @@
 #show: setup
 
 #show: template.with(
-  title: "",
-  author: "",
+  title: "Game Idea Description",
+  author: "Filippa Björklund, Mateo Buela, Sana Dehghani, Matteo Del Monaco, Arsenijs Dremacs, Iakovos Iason Tountas",
   print: false,
   slides: false,
   contents: true,
